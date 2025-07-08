@@ -69,18 +69,3 @@ class Project(models.Model):
     def __str__(self):
         return self.name
     
-#signals
-
-
-
-@receiver(m2m_changed, sender=Task.assigned_to.through)
-def notify_employees_on_task_creation(sender,instance, action ,**kwargs):
-        if action=='post_add':
-            assigned_emails=[emp.email for emp in instance.assigned_to.all()]
-            
-            send_mail(
-                "New Task Assigned",
-                f"You have been assigned with a new task: {instance.title}",
-                "saiyedul.abrar1430@gmail.com",
-                assigned_emails
-            )
