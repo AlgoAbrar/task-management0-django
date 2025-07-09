@@ -9,8 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm
 class RegisterForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name',
-                  'password1', 'password2', 'email']
+        fields = ['username', 'first_name', 'last_name','password1', 'password2', 'email']
 
     def __init__(self, *args, **kwargs):
         super(UserCreationForm, self).__init__(*args, **kwargs)
@@ -25,8 +24,7 @@ class CustomRegistrationForm(StyledFormMixin, forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name',
-                  'password1', 'confirm_password', 'email']
+        fields = ['username', 'first_name', 'last_name','password1', 'confirm_password', 'email']
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -56,8 +54,7 @@ class CustomRegistrationForm(StyledFormMixin, forms.ModelForm):
             errors.append('Password must include at least one number.')
 
         if not re.search(r'[@#$%^&+=]', password1):
-            errors.append(
-                'Password must include at least one special character.')
+            errors.append('Password must include at least one special character.')
 
         if errors:
             raise forms.ValidationError(errors)
