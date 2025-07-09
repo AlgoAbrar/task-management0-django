@@ -2,7 +2,6 @@ from django.db.models.signals import post_save, pre_save, m2m_changed, post_dele
 from django.dispatch import receiver
 from django.core.mail import send_mail
 from tasks.models import Task
-from django.conf import settings
 
 
 @receiver(m2m_changed, sender=Task.assigned_to.through)
@@ -16,7 +15,7 @@ def notify_employees_on_task_creation(sender, instance, action, **kwargs):
         send_mail(
             "New Task Assigned",
             f"You have been assigned to the task: {instance.title}",
-            settings.EMAIL_HOST_USER,
+            "slashupdates@gmail.com",
             assigned_emails,
             fail_silently=False,
         )
