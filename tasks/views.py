@@ -45,8 +45,7 @@ def manager_dashboard(request):
 
     # Retriving task data
 
-    base_query = Task.objects.select_related(
-        'details').prefetch_related('assigned_to')
+    base_query = Task.objects.select_related('details').prefetch_related('assigned_to')
 
     if type == 'completed':
         tasks = base_query.filter(status='COMPLETED')
